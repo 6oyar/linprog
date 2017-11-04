@@ -1,7 +1,7 @@
 function [ A ] = toCanonicalForm( inputMatrix )
 m = size(inputMatrix, 1); 
 n = size(inputMatrix, 2);
-A = zeros(2*m, n + 2*m);
+A = zeros(2*m, n);
 
 for i = 1:m
     for j = 1:n
@@ -11,17 +11,13 @@ end
 
 for i = 1:m
     for j = 1:n
-        A(i + m,j) = inputMatrix(i,j);
+        A(i + m,j) = (-1) * inputMatrix(i,j);
     end
 end
+A = [A;[];[]];
 
-for i = 1:m
-    A(i,i + n) = 1;
-end
-
-for i = 1:m
-    A(i + m,i + +n + m) = -1;
-end
-
+for j = 1:n
+    A(2*m+1,j) = 1;
+    A(2*m+2,j) = -1;
 end
 
